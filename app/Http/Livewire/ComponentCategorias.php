@@ -15,8 +15,14 @@ class ComponentCategorias extends Component
         return view('livewire.component-categorias');
     }
 
-    public function crear_categoria()
+    public function crearCategoria()
     {
+        $this->validate(
+            [
+                'nombre'=>'required',
+                'estado'=>'required'
+            ]
+        );
         Categoria::create([
             'nombre' => $this->nombre,
             'estado' => $this->estado

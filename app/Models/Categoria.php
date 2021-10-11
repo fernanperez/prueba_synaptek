@@ -12,4 +12,10 @@ class Categoria extends Model
     protected $table = 'categorias';
 
     protected $guarded = [];
+
+
+    public function blog()
+    {
+        return $this->hasOne(Blog::class, 'categoria_id');
+    }
 }

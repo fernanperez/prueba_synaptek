@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('homepage');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.configuraciones');
+    })->name('dashboard');
+    Route::get('/categoria', function () {
+        return view('admin.categoria');
+    })->name('categoria');
+    Route::get('/categoria', function () {
+        return view('admin.blog');
+    })->name('blog');
+});

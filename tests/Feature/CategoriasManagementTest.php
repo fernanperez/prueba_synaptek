@@ -22,12 +22,11 @@ class CategoriasManagementTest extends TestCase
     /** @test */
     public function crearCategorias()
     {
-        $this->actingAs($this->user);
-
-        Livewire::test('component-categorias')
+        Livewire::actingAs($this->user)
+        ->test('component-categorias')
         ->set('nombre', 'primera categoria')
         ->set('estado', 1)
-        ->call('crear_categoria');
+        ->call('crearCategoria');
 
         $this->assertCount(1, Categoria::all());
         $this->assertTrue(Categoria::whereNombre('primera categoria')->exists());
@@ -36,12 +35,22 @@ class CategoriasManagementTest extends TestCase
     /** @test */
     public function listaCategorias()
     {
-        $this->actingAs($this->user);
-
         Categoria::factory()->count(3)->create();
-        Livewire::test('component-categorias')
+        Livewire::actingAs($this->user)
+        ->test('component-categorias')
         ->call('listarCategorias');
 
         $this->assertCount(3, Categoria::all());
+    }
+
+    /** @test */
+    public function validarDatosCategoria()
+    {
+        Livewire::actingAs($this->user)
+        ->test('component-categorias')
+        ->set('nombre', '')
+        ->set('estado', '')
+        ->call('crearCategoria')
+        ->assertHasErrors(['nombre'=>'required', 'estado'=>'required']);
     }
 }
