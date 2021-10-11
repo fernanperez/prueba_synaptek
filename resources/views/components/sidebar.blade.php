@@ -30,20 +30,25 @@
 
         <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Administración</span>
         </li>
+
         <li class="nav-item">
-            <x-jet-nav-link class="d-flex align-items-center" href="#"> <i class="fal fa-bookmark">
+            <x-jet-nav-link class="d-flex align-items-center" href="{{ route('categoria') }}"
+                :active="request()->routeIs('categoria')"> <i class="fal fa-bookmark">
                 </i>
                 <span class="menu-title text-truncate" data-i18n="Crear Categorias">Crear Categorías</span>
             </x-jet-nav-link>
         </li>
+
         <li class="nav-item">
-            <x-jet-nav-link class="d-flex align-items-center" href="#"> <i class="fal fa-blog">
-                </i>
+            <x-jet-nav-link class="d-flex align-items-center" href="{{ route('blog') }}"
+                :active="request()->routeIs('blog')">
+                <i class="fal fa-blog"></i>
                 <span class="menu-title text-truncate" data-i18n="Crear Blog">Crear Blog</span>
             </x-jet-nav-link>
         </li>
         <li class="nav-item">
-            <x-jet-nav-link class="d-flex align-items-center" href="#"> <i class="fal fa-users">
+            <x-jet-nav-link class="d-flex align-items-center" href="#"> <i class="fal fa-users"
+                    :active="request()->routeIs('administracion.*')">
                 </i>
                 <span class="menu-title text-truncate" data-i18n="Administrar Usuarios">Administrar Usuarios</span>
             </x-jet-nav-link>

@@ -21,10 +21,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.configuraciones');
     })->name('dashboard');
+
     Route::get('/categoria', function () {
         return view('admin.categoria');
     })->name('categoria');
-    Route::get('/categoria', function () {
+
+    Route::get('/blog', function () {
         return view('admin.blog');
     })->name('blog');
 });
