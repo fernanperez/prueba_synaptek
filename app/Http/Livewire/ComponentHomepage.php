@@ -22,6 +22,6 @@ class ComponentHomepage extends Component
         return Blog::where('blogs.estado', 1)
             ->join('categorias as c', 'blogs.categoria_id', '=', 'c.id')
             ->where('c.estado', 1)
-            ->Paginate();
+            ->Paginate(12);
     }
 }

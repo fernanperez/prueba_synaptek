@@ -6,7 +6,7 @@ use App\Models\blog;
 use App\Models\Categoria;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str as Str;
 
 class BlogFactory extends Factory
 {
@@ -24,9 +24,11 @@ class BlogFactory extends Factory
      */
     public function definition()
     {
+        $titulo = $this->faker->sentence(4);
         return [
-            'titulo' => $this->faker->sentence(4),
+            'titulo' => $titulo,
             'descripcion' => $this->faker->paragraph(6),
+            'slug' => Str::slug($titulo),
             'imagen' => $this->faker->imageUrl(),
             'estado' => $this->faker->numberBetween(0, 1),
             'categoria_id' => Categoria::inRandomOrder()->first()->id,

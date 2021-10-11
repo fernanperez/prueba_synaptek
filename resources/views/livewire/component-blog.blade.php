@@ -12,6 +12,7 @@
                     <th scope="col">Titulo</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Imagen</th>
+                    <th scope="col">Slug</th>
                     <th scope="col">Categoría</th>
                     <th scope="col">Autor</th>
                     <th scope="col">Estado</th>
@@ -27,6 +28,7 @@
                         <td><span class="d-inline-block col-3 text-truncate"
                                 style="max-width: 20rem">{{ $blog->descripcion }}</span></td>
                         <td>{{ $blog->imagen }}</td>
+                        <td>{{ $blog->slug }}</td>
                         <td>{{ $blog->categoria->nombre }}</td>
                         <td>{{ $blog->user->name }}</td>
                         <td>{!! $blog->estado == 1
@@ -50,7 +52,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8">
+                        <td colspan="9">
                             <p class="text-center">No se encontraron registros</p>
                         </td>
                     </tr>

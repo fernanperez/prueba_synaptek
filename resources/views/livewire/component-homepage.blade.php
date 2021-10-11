@@ -9,8 +9,8 @@
         </button>
         <div class="container">
             <!-- Begin Logo -->
-            <a class="navbar-brand" href="index.html">
-                <img src="{{ asset('img/logo-dentos.png') }}" width="100px" height="200px" alt="logo">
+            <a class="navbar-brand" href="{{ route('homepage') }}">
+                <img src="{{ asset('img/logo-dentos.png') }}" width="150px" height="200px" alt="logo">
             </a>
             <!-- End Logo -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
@@ -45,21 +45,22 @@
                 <!-- begin post -->
                 @forelse ($blogsPublicados as $blog)
                     <div class="card">
-                        <a href="#">
+                        <a href="{{ route('publicacion', $blog->slug) }}">
                             <img class="img-fluid" src="{{ $blog->imagen }}"
                                 alt="{{ $blog->nombre . '.png' }}">
                         </a>
                         <div class="card-block">
-                            <h2 class="card-title"><a href="post.html">{{ $blog->titulo }}</a></h2>
+                            <h2 class="card-title"><a
+                                    href=" {{ route('publicacion', $blog->slug) }}">{{ $blog->titulo }}</a></h2>
                             <h4 class="card-text"><span
                                     class="d-inline-block col-6 text-truncate">{{ $blog->descripcion }}</span>
                             </h4>
                             <div class="metafooter">
                                 <div class="wrapfooter">
                                     <span class="meta-footer-thumb">
-                                        <a href="author.html"><img class="author-thumb"
-                                                src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x"
-                                                alt="{{ $blog->user->name . '.png' }}"></a>
+                                        <img class="author-thumb"
+                                            src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x"
+                                            alt="{{ $blog->user->name . '.png' }}">
                                     </span>
                                     <span class="author-meta">
                                         <span class="post-name"><a
@@ -83,6 +84,9 @@
                     </div>
                 @endforelse
 
+            </div>
+            <div class="d-flex mt-5 justify-content-center">
+                <div>{{ $blogs->links() }}</div>
             </div>
         </section>
         <!-- End List Posts

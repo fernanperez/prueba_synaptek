@@ -30,28 +30,39 @@
 
         <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Administración</span>
         </li>
+        @if (Auth::user()->rol == 1)
 
-        <li class="nav-item">
-            <x-jet-nav-link class="d-flex align-items-center" href="{{ route('categoria') }}"
-                :active="request()->routeIs('categoria')"> <i class="fal fa-bookmark">
-                </i>
-                <span class="menu-title text-truncate" data-i18n="Crear Categorias">Crear Categorías</span>
-            </x-jet-nav-link>
-        </li>
+            <li class="nav-item">
+                <x-jet-nav-link class="d-flex align-items-center" href="{{ route('categoria') }}"
+                    :active="request()->routeIs('categoria')"> <i class="fal fa-bookmark">
+                    </i>
+                    <span class="menu-title text-truncate" data-i18n="Crear Categorias">Crear Categorías</span>
+                </x-jet-nav-link>
+            </li>
 
-        <li class="nav-item">
-            <x-jet-nav-link class="d-flex align-items-center" href="{{ route('blog') }}"
-                :active="request()->routeIs('blog')">
-                <i class="fal fa-blog"></i>
-                <span class="menu-title text-truncate" data-i18n="Crear Blog">Crear Blog</span>
-            </x-jet-nav-link>
-        </li>
-        <li class="nav-item">
-            <x-jet-nav-link class="d-flex align-items-center" href="{{ route('usuarios') }}"
-                :active="request()->routeIs('usuarios')"> <i class="fal fa-users">
-                </i>
-                <span class="menu-title text-truncate" data-i18n="Administrar Usuarios">Administrar Usuarios</span>
-            </x-jet-nav-link>
-        </li>
+            <li class="nav-item">
+                <x-jet-nav-link class="d-flex align-items-center" href="{{ route('blog') }}"
+                    :active="request()->routeIs('blog')">
+                    <i class="fal fa-blog"></i>
+                    <span class="menu-title text-truncate" data-i18n="Crear Blog">Crear Blog</span>
+                </x-jet-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-jet-nav-link class="d-flex align-items-center" href="{{ route('usuarios') }}"
+                    :active="request()->routeIs('usuarios')"> <i class="fal fa-users">
+                    </i>
+                    <span class="menu-title text-truncate" data-i18n="Administrar Usuarios">Administrar Usuarios</span>
+                </x-jet-nav-link>
+            </li>
+        @elseif(Auth::user()->rol == 0)
+            <li class="nav-item">
+                <x-jet-nav-link class="d-flex align-items-center" href="{{ route('blog') }}"
+                    :active="request()->routeIs('blog')">
+                    <i class="fal fa-blog"></i>
+                    <span class="menu-title text-truncate" data-i18n="Crear Blog">Crear Blog</span>
+                </x-jet-nav-link>
+            </li>
+        @endif
+
     </ul>
 </div>

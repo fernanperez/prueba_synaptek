@@ -2,6 +2,16 @@
 
 <x-modal id="crearBlog" title="Crear Blog" wire="wire:ignore.self" :noFooter="true">
     <x-slot name='form'>
+        <div>
+            @if (session()->has('errorSlug'))
+                <div class="mb-1 py-1 alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong class="px-1">{!! session('errorSlug') !!}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+        </div>
         <form wire:submit.prevent="crearBlog">
             <x-input id="titulo_crear" for="titulo_crear" type="text" placeholder="titulo" label="Titulo"
                 wire="wire:model.defer=titulo" :isRequired="false">

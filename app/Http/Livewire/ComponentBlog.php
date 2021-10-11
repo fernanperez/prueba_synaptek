@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Str as Str;
 use Livewire\WithPagination;
 
 class ComponentBlog extends Component
@@ -43,7 +44,7 @@ class ComponentBlog extends Component
         'estado.required' => 'Es necesario seleccionar el estado',
     ];
 
-    public $titulo, $descripcion, $imagen, $categoria_id, $estado;
+    public $titulo, $descripcion, $slug, $imagen, $categoria_id, $estado;
 
     public function render()
     {
@@ -80,18 +81,34 @@ class ComponentBlog extends Component
     {
         $this->validate();
 
-        Blog::create([
-            'titulo' => $this->titulo,
-            'descripcion' => $this->descripcion,
-            'imagen' => $this->imagen,
-            'categoria_id' => $this->categoria_id,
-            'estado' => $this->estado,
-            'user_id' => Auth::user()->id,
-        ]);
+        $this->slug = Str::slug($this->titulo);
+        $slugExist = Blog::where('slug', $this->slug)
+            ->get();
 
-        session()->flash('message', 'Blog creado con exito!.');
-        $this->reset();
-        $this->dispatchBrowserEvent('closeModal');
+        // Verificar que el slug es único
+        $unico = true;
+        if ($slugExist->count() > 0) {
+            if ($this->slug == $slugExist[0]['slug']) {
+                $unico = false;
+            }
+        }
+
+        if ($unico) {
+            Blog::create([
+                'titulo' => $this->titulo,
+                'descripcion' => $this->descripcion,
+                'imagen' => $this->imagen,
+                'slug' => $this->slug,
+                'categoria_id' => $this->categoria_id,
+                'estado' => $this->estado,
+                'user_id' => Auth::user()->id,
+            ]);
+            session()->flash('message', 'Blog creado con exito!.');
+            $this->reset();
+            $this->dispatchBrowserEvent('closeModal');
+        } else {
+            session()->flash('errorSlug', 'ya existe un blog con ese nombre!.');
+        }
     }
 
     public function editarBlog($blog_id)
