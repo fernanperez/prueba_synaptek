@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use App\Actions\Jetstream\DeleteUser;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Fortify\Fortify;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 
@@ -28,6 +32,26 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configurePermissions();
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
+
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('users.email', $request->email)
+                ->first();
+
+            if (!empty($user)) {
+                if ($user->estado == 0) {
+                    $request->session()->flash('status', 'El usuario esta inhabilitado, contacte con su administrador');
+                    return false;
+                } elseif ($user->estado == 1 && Hash::check($request->password, $user->password)) {
+                    return $user;
+                } else {
+                    $request->session()->flash('status', 'Contraseña erronea');
+                    return false;
+                }
+            } else {
+                $request->session()->flash('status', 'Usuario No existe');
+                return false;
+            }
+        });
     }
 
     /**

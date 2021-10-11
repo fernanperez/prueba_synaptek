@@ -29,4 +29,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/blog', function () {
         return view('admin.blog');
     })->name('blog');
+
+    Route::get('/usuarios', function () {
+        return view('admin.usuarios');
+    })->name('usuarios');
 });

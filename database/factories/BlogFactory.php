@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Blog;
+use App\Models\blog;
+use App\Models\Categoria;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +15,7 @@ class BlogFactory extends Factory
      *
      * @var string
      */
-    protected $model = Blog::class;
+    protected $model = blog::class;
 
     /**
      * Define the model's default state.
@@ -27,8 +29,8 @@ class BlogFactory extends Factory
             'descripcion' => $this->faker->paragraph(6),
             'imagen' => $this->faker->imageUrl(),
             'estado' => $this->faker->numberBetween(0, 1),
-            'categoria_id' => 1,
-            'user_id' => Auth::user()->id
+            'categoria_id' => Categoria::inRandomOrder()->first()->id,
+            'user_id' => User::whereIn('rol', [0, 1])->inRandomOrder()->first()->id,
         ];
     }
 }

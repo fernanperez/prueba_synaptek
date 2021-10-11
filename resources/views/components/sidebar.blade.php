@@ -47,8 +47,8 @@
             </x-jet-nav-link>
         </li>
         <li class="nav-item">
-            <x-jet-nav-link class="d-flex align-items-center" href="#"> <i class="fal fa-users"
-                    :active="request()->routeIs('administracion.*')">
+            <x-jet-nav-link class="d-flex align-items-center" href="{{ route('usuarios') }}"
+                :active="request()->routeIs('usuarios')"> <i class="fal fa-users">
                 </i>
                 <span class="menu-title text-truncate" data-i18n="Administrar Usuarios">Administrar Usuarios</span>
             </x-jet-nav-link>
