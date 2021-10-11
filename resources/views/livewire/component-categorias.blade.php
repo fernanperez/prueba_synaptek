@@ -1,5 +1,5 @@
 <div>
-    {{-- Stop trying to control. --}}
+    <x-administracion.crear-categoria />
     <div class="container">
         <x-global.filtro :paginacion='$paginaciones' :boton="true" :modalColor="'primary'"
             :nombreModal="'Crear Categoría'" :idModal="'crearCategoria'" />
@@ -25,9 +25,9 @@
                             class="badge-glow badge-pill badge-success">Publicado</span>'
     : '<span
                         class="badge badge-pill badge-danger">No Publicado</span>' !!}</td>
-                        <td><button type="submit" wire:click="edit({{ $categoria->id }})"
-                                class="btn btn-sm btn-warning" data-toggle="modal"
-                                data-target="#editar_usuario_empresa"><i class="far fa-edit"></i></button>
+                        <td><button type="submit" wire:click="editarCategoria({{ $categoria->id }})"
+                                class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editarCategoria"><i
+                                    class="far fa-edit"></i></button>
                             {!! $categoria->estado == 1
     ? '<button type="submit"
                             wire:click="destroy(' .

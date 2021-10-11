@@ -27,7 +27,17 @@ class ComponentCategorias extends Component
         $this->resetPage();
     }
 
-    public $nombre, $estado;
+    protected $rules = [
+        'nombre' => 'required',
+        'estado' => 'required',
+    ];
+
+    protected $messages = [
+        'nombre.required' => 'Debe ingresar un nombre',
+        'estado.required' => 'Debe seleccionar el estado',
+    ];
+
+    public $nombre, $estado, $categoria_id;
 
     public function render()
     {
@@ -45,14 +55,6 @@ class ComponentCategorias extends Component
         $this->estado = '';
     }
 
-    public function crear_categoria()
-    {
-        Categoria::create([
-            'nombre' => $this->nombre,
-            'estado' => $this->estado
-        ]);
-    }
-
     public function listarCategorias()
     {
         if (empty($this->filtro)) {
@@ -67,6 +69,43 @@ class ComponentCategorias extends Component
                 })
                 ->Paginate($this->listaPaginacion);
         }
+    }
+
+    public function crearCategoria()
+    {
+        $this->validate();
+
+        Categoria::create([
+            'nombre' => $this->nombre,
+            'estado' => $this->estado
+        ]);
+
+        session()->flash('message', 'Categoría creada con exito!.');
+        $this->reset();
+        $this->dispatchBrowserEvent('closeModal');
+    }
+
+    public function editarCategoria($categoria_id)
+    {
+        $categoria = Categoria::find($categoria_id);
+        $this->nombre = $categoria->nombre;
+        $this->estado = $categoria->estado;
+        $this->categoria_id = $categoria_id;
+    }
+
+    public function actualizarCategoria()
+    {
+        $this->validate();
+
+        Categoria::where('id', $this->categoria_id)
+            ->update([
+                'nombre' => $this->nombre,
+                'estado' => $this->estado,
+            ]);
+        $this->categoria_id = null;
+        session()->flash('message', 'Categoría actualizada con exito!.');
+        $this->reset();
+        $this->dispatchBrowserEvent('closeModal');
     }
 
     public function show(Categoria $categoria)

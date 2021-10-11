@@ -27,6 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'estado',
+        'rol',
     ];
 
     /**
@@ -62,5 +64,11 @@ class User extends Authenticatable
     public function blog()
     {
         return $this->hasOne(Blog::class, 'user_id');
+    }
+
+    public function info_roles()
+    {
+        $roles = ["Colaborador", "Administrador"];
+        return $roles[$this->rol];
     }
 }

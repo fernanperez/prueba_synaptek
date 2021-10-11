@@ -1,14 +1,15 @@
 <div>
     <div>
+        <x-administracion.crear-usuario />
         <div class="container">
             <x-global.filtro :paginacion='$paginaciones' :boton="true" :modalColor="'primary'"
-                :nombreModal="'Crear Blog'" :idModal="'crearCategoriaBlog'" />
+                :nombreModal="'Crear Usuarios'" :idModal="'crearUsuarios'" />
         </div>
         <div class=" container table-responsive">
-            <table class="table table-stripe table-hover-animation text-center">
+            <table class="table table-striped table-hover-animation text-center">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
+                        <th scope="col" id="id">Id</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
                         <th scope="col">Estado</th>
@@ -29,9 +30,9 @@
     : '<span
                             class="badge badge-pill badge-danger">Deshabilitado</span>' !!}</td>
                             <td>{{ $usuario->info_roles() }}</td>
-                            <td><button type="submit" wire:click="edit({{ $usuario->id }})"
-                                    class="btn btn-sm btn-warning" data-toggle="modal"
-                                    data-target="#editar_usuario_empresa"><i class="far fa-edit"></i></button>
+                            <td><button type="submit" wire:click="editarUsuario({{ $usuario->id }})"
+                                    class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editarUsuarios"><i
+                                        class="far fa-edit"></i></button>
                                 {!! $usuario->estado == 1
     ? '<button type="submit"
                             wire:click="destroy(' .
