@@ -8,7 +8,7 @@
     <meta name="author" content="Fernan D. Perez">
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
 
-    <title>Laravel</title>
+    <title>Blog-DentOs</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">

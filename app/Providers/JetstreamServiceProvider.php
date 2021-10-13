@@ -39,16 +39,16 @@ class JetstreamServiceProvider extends ServiceProvider
 
             if (!empty($user)) {
                 if ($user->estado == 0) {
-                    $request->session()->flash('status', 'El usuario esta inhabilitado, contacte con su administrador');
+                    $request->session()->flash('statusError', 'El usuario esta inhabilitado, contacte con su administrador');
                     return false;
                 } elseif ($user->estado == 1 && Hash::check($request->password, $user->password)) {
                     return $user;
                 } else {
-                    $request->session()->flash('status', 'Contraseña erronea');
+                    $request->session()->flash('statusError', 'Contraseña erronea');
                     return false;
                 }
             } else {
-                $request->session()->flash('status', 'Usuario No existe');
+                $request->session()->flash('statusError', 'Usuario No existe');
                 return false;
             }
         });

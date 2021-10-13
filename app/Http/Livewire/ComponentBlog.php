@@ -97,7 +97,7 @@ class ComponentBlog extends Component
             Blog::create([
                 'titulo' => $this->titulo,
                 'descripcion' => $this->descripcion,
-                'imagen' => $this->imagen,
+                'imagen' => 'http://lorempixel.com/400/200/abstract/' . rand(1, 10),
                 'slug' => $this->slug,
                 'categoria_id' => $this->categoria_id,
                 'estado' => $this->estado,

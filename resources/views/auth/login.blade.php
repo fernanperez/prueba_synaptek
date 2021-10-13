@@ -24,14 +24,14 @@
                                     </div>
 
                                 @endif
-                                <a href="javascript:void(0);">
+                                <a href="{{ route('homepage') }}">
                                     <img class="img-fluid mx-auto d-block pb-2"
                                         src="{{ asset('img/Logo-dentos.png') }}" alt="logo.png">
                                 </a>
 
                                 <h4 class="card-title mb-1 text-center font-weight-bolder text-indigo-900">Bienvenidos
                                     👋</h4>
-                                <p class="card-text mb-2 text-center"><strong>Inicie sesión</strong>
+                                <p class="card-text mb-2 text-center"><strong>Inicio de sesión</strong>
                                 </p>
 
                                 <form class="auth-login-form mt-2" method="POST" action="{{ route('login') }}">
@@ -72,15 +72,18 @@
                                             <label for="remember_me" class="flex items-center">
                                                 <x-jet-checkbox id="remember_me" class="w-5 h-5 m-0" height="1rem"
                                                     name="remember" tabindex="3" />
-                                                <span
-                                                    class="pl-1 text-lg text-indigo-900">{{ __('Recordar contraseña') }}</span>
+                                                <span class="pl-1 "
+                                                    style="color: black;">{{ __('Recordar contraseña') }}</span>
                                             </label>
                                         </div>
                                     </div>
-                                    <x-jet-button class="btn btn-warning btn-block" tabindex="4">
+                                    <x-jet-button class="btn btn-block btn-warning " tabindex="4">
                                         {{ __('Iniciar Sesión') }}
                                     </x-jet-button>
                                 </form>
+                            </div>
+                            <div class="text-center pb-2">
+                                <a href="{{ route('register') }}"><strong>No tienes cuenta, registrate!</strong></a>
                             </div>
                         </div>
                         <!-- /Login v1 -->
